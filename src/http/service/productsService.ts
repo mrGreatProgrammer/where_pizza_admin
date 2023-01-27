@@ -22,18 +22,6 @@ export const productsApi = createApi({
   endpoints: (builder) => ({
     getAllProducts: builder.query({
       query: (page) => `/all?page=${page}`,
-      // providesTags: (_result, _err, id) => [{ type: 'Products', id }],
-      // providesTags: (result = []) => [
-      //   ...result.map(({ id }: any) => ({ type: "Products", id } as const)),
-      //   { type: "Products" as const, id: "PRODUCT" },
-      // ],
-      // providesTags: (result) =>
-      //   result
-      //     ? [
-      //         ...result.map(({ id }:any) => ({ type: 'Products' as const, id })),
-      //         { type: 'Products', id: 'PRODUCT' },
-      //       ]
-      //     : [{ type: 'Products', id: 'PRODUCT' }],
       providesTags: (result) =>
         result.rows
           ? [
@@ -41,10 +29,6 @@ export const productsApi = createApi({
               { type: "Products", id: "PRODUCT" },
             ]
           : [{ type: "Products", id: "PRODUCT" }],
-      // providesTags: (result, _err, id) => {
-      //   console.log("result", result, "id", id);
-      //   return [{ type: 'Products', id }];
-      // },
     }),
     addProduct: builder.mutation(
       /*<IProduct, Partial<IProduct>>*/ {
@@ -65,8 +49,6 @@ export const productsApi = createApi({
           };
         },
         invalidatesTags: [{ type: "Products", id: "PRODUCT" }],
-        // invalidatesTags: [{ type: 'Post', id: 'PRODUCT' }]
-        // invalidatesTags: ['Posts']
       }
     ),
     getProductByName: builder.query({
