@@ -1,7 +1,9 @@
 import { createApi, fetchBaseQuery } from "@reduxjs/toolkit/query/react";
 import { RootState } from "../../store/store";
 import { IProduct, IProductsResponse } from "../../types/products";
+// import showNotification from "../../utils/showNotification";
 // import type { Pokemon } from './types'
+
 
 // Define a service using a base URL and expected endpoints
 export const productsApi = createApi({
@@ -32,12 +34,14 @@ export const productsApi = createApi({
     }),
     addProduct: builder.mutation(
       /*<IProduct, Partial<IProduct>>*/ {
-        query: ({ about, discount, img, name, price }) => {
+        query: ({ about, discount, img, name, price, ingredients, productsGroupId }) => {
           const formData = new FormData();
           formData.append("name", name);
           formData.append("about", about);
           formData.append("price", price);
           formData.append("discount", discount);
+          formData.append("ingredients", ingredients);
+          formData.append("productsGroupId", productsGroupId);
           for (const key of Object.keys(img)) {
             formData.append("img", img[key]);
           }
@@ -48,11 +52,30 @@ export const productsApi = createApi({
             body: formData,
           };
         },
+        
         invalidatesTags: [{ type: "Products", id: "PRODUCT" }],
+        // onSuccess: (data:any)=>{
+        //   showNotification("success", "ggg", "gggggg");
+        // }
       }
     ),
     getProductByName: builder.query({
       query: (name) => `product/${name}`,
+    }),
+    addGroupOfProduct: builder.mutation({
+      query: (body) => ({ url: "/group_of_products", method: "POST", body }),
+    }),
+    getGroupOfProducts: builder.query({
+      query: () => ({ url: "/group_of_products" }),
+    }),
+    getGroupByProducts: builder.query({
+      query: ({limit, page}) => ({ url: `/products_by_group?limit=${limit}&page=${page}` }),
+    }),
+    addRecipeOfProduct: builder.mutation({
+      query: (body) => ({ url: "/recipe_of_products", method: "POST", body }),
+    }),
+    getRecipeOfProducts: builder.query({
+      query: () => ({ url: "/recipe_of_products" }),
     }),
   }),
 });
@@ -63,4 +86,10 @@ export const {
   useGetProductByNameQuery,
   useAddProductMutation,
   useGetAllProductsQuery,
+  useLazyGetAllProductsQuery,
+  useAddGroupOfProductMutation,
+  useAddRecipeOfProductMutation,
+  useGetGroupOfProductsQuery,
+  useGetRecipeOfProductsQuery,
+  useGetGroupByProductsQuery
 } = productsApi;

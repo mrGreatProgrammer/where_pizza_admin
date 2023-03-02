@@ -1,7 +1,7 @@
 import React from "react";
 import UserStatistic from "../../compoents/statistics/UserStatistic";
 
-const DashboardPage = () => {
+const AnaliticPage = () => {
   return (
     <div>
       <h1 className="text-4xl font-semibold text-primery">DashboardPage</h1>
@@ -15,4 +15,4 @@ const DashboardPage = () => {
   );
 };
 
-export default DashboardPage;
+export default AnaliticPage;

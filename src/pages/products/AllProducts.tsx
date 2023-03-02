@@ -6,7 +6,8 @@ import { IProduct } from "../../types/products";
 import { Spin, Pagination } from "antd";
 
 const AllProducts = () => {
-  const { data, isError, isLoading } = useGetAllProductsQuery(1);
+  const [page, setPage] = React.useState(1);
+  const { data, isError, isLoading, isFetching } = useGetAllProductsQuery(page);
 
   console.log(data);
 
@@ -18,23 +19,33 @@ const AllProducts = () => {
           <AddProductForm />
         </div>
         <h3>products</h3>
+
         <div className="show__products-container">
-          {isLoading && <Spin />}
+          {isLoading ||isFetching? <Spin />:<></>}
           {isError && <div className="err_msg">error</div>}
           {data?.count ? (
-            <div className="grid grid-cols-4 gap-x-4 gap-y-4 my-20 ">
-              {data.rows.map((p: IProduct) => (
-                <Product
-                  about={p.about}
-                  img={JSON.parse(p.img)}
-                  name={p.name}
-                  price={p.price}
-                  discount={p.discount}
-                  key={p.id}
-                />
-              ))}
+            <div className="my-20" >
+              <div className="grid grid-cols-4 gap-x-4 gap-y-4 my-8 ">
+                {data.rows.map((p: IProduct) => (
+                  <Product
+                    about={p.about}
+                    img={JSON.parse(p.img)}
+                    name={p.name}
+                    price={p.price}
+                    discount={p.discount}
+                    key={p.id}
+                  />
+                ))}
+              </div>
 
-              <Pagination defaultCurrent={1} total={data?.count} hideOnSinglePage />
+              <div>
+                <Pagination
+                  onChange={setPage}
+                  defaultCurrent={1}
+                  total={data?.count}
+                  hideOnSinglePage
+                />
+              </div>
             </div>
           ) : (
             <div>empty</div>

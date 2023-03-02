@@ -21,11 +21,13 @@ import {
 } from "redux-persist";
 import storage from "redux-persist/lib/storage";
 import { productsApi } from "../http/service/productsService";
+import { usersApi } from "../http/service/usersService";
 
 const rootReducer = combineReducers({
   appSlice,
   
   [productsApi.reducerPath]: productsApi.reducer,
+  [usersApi.reducerPath]: usersApi.reducer,
   // userSlice,
   // counterSlice: counterSlice,
   // productsSlice: productsSlice,
@@ -54,12 +56,13 @@ const store = configureStore({
   reducer: persistedReducer,
   // Adding the api middleware enables caching, invalidation, polling,
   // and other useful features of `rtk-query`.
+  //@ts-ignore
   middleware: (getDefaultMiddleware) =>
     getDefaultMiddleware({
       serializableCheck: {
         ignoredActions: [FLUSH, REHYDRATE, PAUSE, PERSIST, PURGE, REGISTER],
       },
-    }).concat(productsApi.middleware),
+    }).concat(productsApi.middleware, usersApi.middleware),
 });
 
 // optional, but required for refetchOnFocus/refetchOnReconnect behaviors

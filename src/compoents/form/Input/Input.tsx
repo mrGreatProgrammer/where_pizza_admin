@@ -13,7 +13,7 @@ const Input = ({
   defaultValue,
 }: IInputProps) => {
   return (
-    <div className={`input my-4 ${className}`}>
+    <div className={`input my-4 flex flex-col max-w-3xl ${className}`}>
       <label
         className="label text-txtGrey mb-2 text-xs md:text-sm"
         htmlFor={inpName}

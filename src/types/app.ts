@@ -4,3 +4,11 @@ export interface INavLink {
   icon?: any;
   link: string;
 }
+
+// создаю интерфейс пользователя
+export interface IUserInfo {
+  id: number;
+  fullName: string;
+  tel: string;
+  role: string;
+}

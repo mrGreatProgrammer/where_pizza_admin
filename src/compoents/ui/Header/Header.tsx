@@ -1,14 +1,14 @@
-import React from 'react'
-import HeaderNavs from '../../Navs/HeaderNavs/HeaderNavs'
+import React from "react";
+import HeaderNavs from "../../Navs/HeaderNavs/HeaderNavs";
 
-const Header = () => {
+const Header: React.FC = (): JSX.Element => {
   return (
     <header>
       <div className="container">
-          <HeaderNavs />
+        <HeaderNavs />
       </div>
     </header>
-  )
-}
+  );
+};
 
-export default Header
+export default Header;

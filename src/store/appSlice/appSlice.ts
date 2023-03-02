@@ -1,6 +1,7 @@
 import { createSlice } from "@reduxjs/toolkit";
 import type { PayloadAction } from "@reduxjs/toolkit";
 import { logInApi, registerApi } from "../../http/user/auth";
+import { IUserInfo } from "../../types/app";
 // import { RootState } from "../store";
 // import type { RootState } from "../../app/store";
 
@@ -9,7 +10,7 @@ interface AppState {
   value: number;
   burgerOpened: boolean;
   authorized: boolean;
-  userInfo: any;
+  userInfo: null | IUserInfo; // передаю интерфейс пользователя
   token: null| string;
 
   authLoading: boolean;
