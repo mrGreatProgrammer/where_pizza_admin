@@ -59,6 +59,17 @@ export const productsApi = createApi({
         // }
       }
     ),
+    deleteProduct: builder.mutation({
+        query: (id) => {
+         
+          return {
+            url: `/product?id=${id}`,
+            method: "DELETE",
+          };
+        },
+        invalidatesTags: [{ type: "Products", id: "PRODUCT" }],
+      }
+    ),
     getProductByName: builder.query({
       query: (name) => `product/${name}`,
     }),
@@ -86,10 +97,11 @@ export const {
   useGetProductByNameQuery,
   useAddProductMutation,
   useGetAllProductsQuery,
-  useLazyGetAllProductsQuery,
+  // useLazyGetAllProductsQuery,
   useAddGroupOfProductMutation,
   useAddRecipeOfProductMutation,
   useGetGroupOfProductsQuery,
   useGetRecipeOfProductsQuery,
-  useGetGroupByProductsQuery
+  useGetGroupByProductsQuery,
+  useDeleteProductMutation
 } = productsApi;

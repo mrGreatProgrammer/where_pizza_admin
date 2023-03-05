@@ -63,7 +63,7 @@ const HeaderNavs: React.FC = (): JSX.Element => {
   const { userInfo } = useAppSelector((state) => state.appSlice);
 
   return (
-    <nav className=" py-2 px-4  flex flex-row justify-between">
+    <nav className=" py-2 px-4  flex flex-row justify-between items-center">
       <div>
         <Link to={"/"}>
           <FullLogo />

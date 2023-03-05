@@ -9,8 +9,6 @@ const AllProducts = () => {
   const [page, setPage] = React.useState(1);
   const { data, isError, isLoading, isFetching } = useGetAllProductsQuery(page);
 
-  console.log(data);
-
   return (
     <div>
       <h1>AllProducts</h1>
@@ -21,13 +19,14 @@ const AllProducts = () => {
         <h3>products</h3>
 
         <div className="show__products-container">
-          {isLoading ||isFetching? <Spin />:<></>}
+          {isLoading || isFetching ? <Spin /> : <></>}
           {isError && <div className="err_msg">error</div>}
-          {data?.count ? (
-            <div className="my-20" >
+          {data?.rows ? (
+            <div className="my-20">
               <div className="grid grid-cols-4 gap-x-4 gap-y-4 my-8 ">
                 {data.rows.map((p: IProduct) => (
                   <Product
+                    id={p.id}
                     about={p.about}
                     img={JSON.parse(p.img)}
                     name={p.name}

@@ -7,6 +7,7 @@ import { BrowserRouter } from "react-router-dom";
 import { Provider } from "react-redux";
 import { PersistGate } from "redux-persist/integration/react";
 import store, { persistor } from "./store/store";
+import { ConfigProvider } from "antd";
 
 const root = ReactDOM.createRoot(
   document.getElementById("root") as HTMLElement
@@ -19,7 +20,16 @@ root.render(
         persistor={persistor}
       >
         <BrowserRouter>
-          <App />
+          <ConfigProvider
+            theme={{
+              token: {
+                colorPrimary: "#FF7010",
+                colorPrimaryBg: "#FF7010",
+              },
+            }}
+          >
+            <App />
+          </ConfigProvider>
         </BrowserRouter>
       </PersistGate>
     </Provider>

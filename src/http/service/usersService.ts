@@ -7,8 +7,8 @@ import { IProduct, IProductsResponse } from "../../types/products";
 
 // Define a service using a base URL and expected endpoints
 export const usersApi = createApi({
-  tagTypes: ["Products"],
-  reducerPath: "productsApi",
+  // tagTypes: ["Products"],
+  reducerPath: "usersApi",
 
   baseQuery: fetchBaseQuery({
     baseUrl: "http://localhost:4000/api/user/",

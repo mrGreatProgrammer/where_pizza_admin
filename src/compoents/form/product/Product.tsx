@@ -1,9 +1,15 @@
+import { Button, notification } from "antd";
 import React from "react";
+import { useDeleteProductMutation } from "../../../http/service/productsService";
+import { DeleteIcon } from "../../../imgs/icons";
 import { IProduct } from "../../../types/products";
+import DeleteModal from "../../Modals/ConfirmModals/DeleteModal";
+import EditModal from "../../Modals/ConfirmModals/EditModal";
 import BtnChooseProduct from "../Btns/BtnChooseProduct";
 // import BtnChooseProduct from "../../forms/Buttons/BtnChooseProduct";
 // import ModalProduct from "../../Modal/ModalProduct";
 // import ProductLabel from "../../ui/ProductLabel/ProductLabel";
+import EditIcon from "./../../../imgs/icons/EditIcon";
 
 const Product = ({
   id,
@@ -12,12 +18,39 @@ const Product = ({
   name,
   price,
   discount,
-  productLabelTxt
+  productLabelTxt,
 }: IProduct): JSX.Element => {
   const [modalVisibility, setModalVisibility] = React.useState(false);
+  const [editModal, setEditModal] = React.useState<boolean>(false);
+  const [deleteModal, setDeleteModal] = React.useState<boolean>(false);
+  const [deleteProductApi, { data, isError, isSuccess, isLoading }] =
+    useDeleteProductMutation();
 
   function showModal() {}
   function closeModal() {}
+
+  function deleteProduct() {
+    deleteProductApi(id).then((e: any) => {
+      if (e?.data?.message === "success") {
+        notification.open({
+          type: "success",
+          message: "Success",
+          description:
+            "This is the content of the notification. This is the content of the notification. This is the content of the notification.",
+          duration: 5,
+        });
+      } else {
+        notification.open({
+          type: "error",
+          message: "ERROR",
+          description:
+            "This is the content of the notification. This is the content of the notification. This is the content of the notification.",
+          duration: 5,
+        });
+      }
+    });
+    setDeleteModal(false);
+  }
 
   return (
     <>
@@ -50,9 +83,6 @@ const Product = ({
               </div>
             </div>
             <div className="product__bottom_content-container mt-4 flex flex-row justify-between">
-              <div className="hidden md:block product__btn-container">
-                <BtnChooseProduct txt="Выбрать" />
-              </div>
               <div className="product__price-container flex flex-row-reverse md:flex-col items-center md:items-start">
                 {discount && (
                   <s className="product__discount text-sm text-txtGrey">
@@ -64,8 +94,23 @@ const Product = ({
                 </p>
               </div>
             </div>
+            <div className="flex flex-row justify-between mt-4 mb-2">
+              <Button type="primary" onClick={() => setEditModal(true)}>
+                <EditIcon />
+              </Button>
+              <Button onClick={() => setDeleteModal(true)}>
+                <DeleteIcon />
+              </Button>
+            </div>
           </div>
         </div>
+
+        <EditModal open={editModal} onCancel={() => setEditModal(false)} />
+        <DeleteModal
+          open={deleteModal}
+          onCancel={() => setDeleteModal(false)}
+          onOk={deleteProduct}
+        />
       </div>
       {/* <ModalProduct
         setModalVisibility={setModalVisibility}

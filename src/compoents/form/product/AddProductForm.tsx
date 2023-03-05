@@ -44,18 +44,17 @@ const AddProductForm = () => {
     //@ts-ignore
   } = useGetGroupOfProductsQuery();
 
-  const handlerSubmit = async (data: any) => {
+  const handlerSubmit = (data: any) => {
     console.log(data);
-    await addProduct(data).then((d) => {
-      console.log(d);
-      if (isSuccess) {
-        showNotification("success", "ssss", "gfafgagfafga");
-      }else if(isError){
-        showNotification("error", "error", "error gfafgagfafga");
-      } else {
-        showNotification("info", "error", "error gfafgagfafga");
-      }
-    });
+   addProduct(data)
+      // console.log(d);
+      // if (isSuccess) {
+      //   showNotification("success", "ssss", "gfafgagfafga");
+      // }else if(isError){
+      //   showNotification("error", "error", "error gfafgagfafga");
+      // } else {
+      //   showNotification("info", "error", "error gfafgagfafga");
+      // }
   };
 
   return (

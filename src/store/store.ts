@@ -25,7 +25,6 @@ import { usersApi } from "../http/service/usersService";
 
 const rootReducer = combineReducers({
   appSlice,
-  
   [productsApi.reducerPath]: productsApi.reducer,
   [usersApi.reducerPath]: usersApi.reducer,
   // userSlice,
