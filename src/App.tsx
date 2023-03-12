@@ -13,6 +13,7 @@ import "./styles/styles.scss";
 import Users from "./pages/users/Users";
 import AllUsers from "./pages/users/AllUsers";
 import Orders from "./pages/users/Orders";
+import SellerPage from "./pages/SellerPage/SellerPage";
 
 function App() {
   return (
@@ -31,6 +32,10 @@ function App() {
         <Route path="/users" element={<Users />}>
           <Route index element={<AllUsers />} />
           <Route path="orders" element={<Orders />} />
+        </Route>
+        <Route path="/seller" element={<SellerPage />}>
+          {/* <Route  /> */}
+          {/* <Route /> */}
         </Route>
       </Routes>
     </div>

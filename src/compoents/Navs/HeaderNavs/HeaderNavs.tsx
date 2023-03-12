@@ -43,6 +43,11 @@ const headerNav: INavLink[] = [
     title: "users",
     link: "/users",
   },
+  {
+    id: 7,
+    title: "seller",
+    link: "/seller",
+  },
 ];
 
 const authNav: INavLink[] = [
