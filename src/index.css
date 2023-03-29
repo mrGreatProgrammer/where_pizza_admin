@@ -5,3 +5,7 @@
 :where(.css-dev-only-do-not-override-1pxrcbd).ant-btn-primary {
   background: #ff7010 !important;
 }
+
+.container{
+  margin: 0 auto;
+}

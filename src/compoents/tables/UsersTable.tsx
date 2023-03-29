@@ -72,7 +72,7 @@ const onChange: TableProps<DataType>["onChange"] = (
 
 interface jjf {
   count: number;
- rows: DataType[]
+  rows: DataType[];
 }
 
 interface UsersTableType {
@@ -81,10 +81,16 @@ interface UsersTableType {
   isError: boolean;
 }
 
-const UsersTable = ({data, isLaoding, isError}: UsersTableType) => {
-  return <div className="max-w-5xl" >
-  <Table loading={isLaoding} columns={columns} dataSource={data?.rows} onChange={onChange} />;
-  </div>
+const UsersTable = ({ data, isLaoding, isError }: UsersTableType) => {
+  return (
+    <div className="max-w-5xl">
+      <Table
+        columns={columns}
+        dataSource={data?.rows}
+        // onChange={onChange}
+      />
+    </div>
+  );
 };
 
 export default UsersTable;

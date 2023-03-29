@@ -17,7 +17,7 @@ const GroupOfProductsPage = () => {
 
   function onSubmit(data: any) {
     console.log(data);
-    addGroupOfProduct(data).then(d=>showNotification('info', "ghfaga", "agfdg"));
+    addGroupOfProduct(data).then(d=>showNotification('info', "Успешно добавлен!", "Данная группа для продуктов успешно добавлен!"));
   }
 
   return (

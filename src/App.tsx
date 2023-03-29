@@ -19,25 +19,30 @@ function App() {
   return (
     <div className="App">
       <Header />
-      <Routes>
-        <Route path="/" element={<MainPage />}></Route>
-        <Route path="/products" element={<ProductsPage />}>
-          <Route index element={<AllProducts />} />
-        </Route>
-        <Route path={"/group_of_products"} element={<GroupOfProductsPage />} />
-        <Route path={"/product_ingredient"} element={<ProductReceipt />} />
-        <Route path="/analitic" element={<AnaliticPage />}></Route>
-        <Route path="/auth/register" element={<RegisterPage />}></Route>
-        <Route path="/auth/login" element={<LoginPage />}></Route>
-        <Route path="/users" element={<Users />}>
-          <Route index element={<AllUsers />} />
-          <Route path="orders" element={<Orders />} />
-        </Route>
-        <Route path="/seller" element={<SellerPage />}>
-          {/* <Route  /> */}
-          {/* <Route /> */}
-        </Route>
-      </Routes>
+      <div className="container">
+        <Routes>
+          <Route path="/" element={<MainPage />}></Route>
+          <Route path="/products" element={<ProductsPage />}>
+            <Route index element={<AllProducts />} />
+          </Route>
+          <Route
+            path={"/group_of_products"}
+            element={<GroupOfProductsPage />}
+          />
+          <Route path={"/product_ingredient"} element={<ProductReceipt />} />
+          <Route path="/analitic" element={<AnaliticPage />}></Route>
+          <Route path="/auth/register" element={<RegisterPage />}></Route>
+          <Route path="/auth/login" element={<LoginPage />}></Route>
+          <Route path="/users" element={<Users />}>
+            <Route index element={<AllUsers />} />
+            <Route path="orders" element={<Orders />} />
+          </Route>
+          <Route path="/seller" element={<SellerPage />}>
+            {/* <Route  /> */}
+            {/* <Route /> */}
+          </Route>
+        </Routes>
+      </div>
     </div>
   );
 }

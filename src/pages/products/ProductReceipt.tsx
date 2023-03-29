@@ -21,7 +21,7 @@ const ProductReceipt = () => {
 
   function onSubmit(data: any) {
     console.log(data);
-    addIngredient(data).then((d) => showNotification("info", "jshg", "gfagfg"));
+    addIngredient(data).then((d) => showNotification("info", "Успешно добавлено!", "Данный ингредиент успешно добавлен!"));
   }
 
   return (

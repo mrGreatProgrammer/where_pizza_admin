@@ -11,7 +11,7 @@ interface AppState {
   burgerOpened: boolean;
   authorized: boolean;
   userInfo: null | IUserInfo; // передаю интерфейс пользователя
-  token: null| string;
+  token: null | string;
 
   authLoading: boolean;
   authErr: string;
@@ -26,9 +26,7 @@ const initialState: AppState = {
 
   token: null,
   authErr: "",
-  authLoading: false
-
-
+  authLoading: false,
 };
 
 export const appSlice = createSlice({
@@ -36,11 +34,16 @@ export const appSlice = createSlice({
   // `createSlice` will infer the state type from the `initialState` argument
   initialState,
   reducers: {
-    toggleBurgerMenuAC(state, action:PayloadAction<boolean>){
-      state.burgerOpened=action.payload;
-    }
+    toggleBurgerMenuAC(state, action: PayloadAction<boolean>) {
+      state.burgerOpened = action.payload;
+    },
+    logoutAC(state) {
+      state.authorized = false;
+      state.token = "";
+      state.userInfo = null;
+    },
   },
-  extraReducers:{
+  extraReducers: {
     [registerApi.pending.type]: (state, action) => {
       state.authLoading = true;
       state.authErr = "";
@@ -77,10 +80,10 @@ export const appSlice = createSlice({
       state.token = action.payload.token;
       state.userInfo = action.payload.user;
     },
-  }
+  },
 });
 
-export const { toggleBurgerMenuAC } = appSlice.actions;
+export const { toggleBurgerMenuAC, logoutAC } = appSlice.actions;
 
 // Other code such as selectors can use the imported `RootState` type
 // export const selectCount = (state: RootState) => state.counter.value;

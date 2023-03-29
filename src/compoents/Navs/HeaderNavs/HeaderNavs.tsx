@@ -1,7 +1,9 @@
+import { Dropdown, MenuProps } from "antd";
 import React from "react";
 import { Link, NavLink } from "react-router-dom";
 import { FullLogo, UserIcon } from "../../../imgs/icons";
-import { useAppSelector } from "../../../store/store";
+import { logoutAC } from "../../../store/appSlice/appSlice";
+import { useAppDispatch, useAppSelector } from "../../../store/store";
 import { INavLink } from "./../../../types/app";
 
 type setActiveFuncParams = {
@@ -66,6 +68,16 @@ const authNav: INavLink[] = [
 const HeaderNavs: React.FC = (): JSX.Element => {
   // вытаскиваю данные авторизованного пользователя
   const { userInfo } = useAppSelector((state) => state.appSlice);
+  const dispatch = useAppDispatch();
+
+  const dropdownItems: MenuProps["items"] = [
+    {
+      key: "1",
+      label: (
+        <button onClick={() => dispatch(logoutAC())}>Log out</button>
+      ),
+    },
+  ];
 
   return (
     <nav className=" py-2 px-4  flex flex-row justify-between items-center">
@@ -90,16 +102,18 @@ const HeaderNavs: React.FC = (): JSX.Element => {
 
       <div className="account__contianer">
         {userInfo ? (
-          <div className="flex flex-row gap-x-3 items-center border-2 rounded-lg py-1.5 px-4" >
-            <div className="account__avatar--container">
-              <UserIcon />
+          <Dropdown menu={{ items: dropdownItems }} placement="bottom">
+            <div className="flex flex-row gap-x-3 items-center border-2 rounded-lg py-1.5 px-4">
+              <div className="account__avatar--container">
+                <UserIcon />
+              </div>
+              <div className="account__txt">
+                <p className="text-lg font-semibold">{userInfo.fullName}</p>
+                <p className="text-sm">{userInfo.role}</p>
+                <p className="text-xs text-txtGrey">{userInfo.tel}</p>
+              </div>
             </div>
-            <div className="account__txt">
-              <p className="text-lg font-semibold">{userInfo.fullName}</p>
-              <p className="text-sm">{userInfo.role}</p>
-              <p className="text-xs text-txtGrey">{userInfo.tel}</p>
-            </div>
-          </div>
+          </Dropdown>
         ) : (
           <ul className="flex flex-row gap-x-3">
             {authNav.map((e) => (
