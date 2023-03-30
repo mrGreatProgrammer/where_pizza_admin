@@ -62,7 +62,7 @@ const Product = ({
           <div className="product__img-container flex items-center justify-center  ">
             <img
               className="product__img-img rounded-3xl"
-              src={`http://localhost:4000${img[0]}`}
+              src={`${process.env.REACT_APP_API_URL}${img[0]}`}
               alt={"ppprroduct"}
             />
           </div>

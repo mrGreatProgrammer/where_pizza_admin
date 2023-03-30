@@ -4,10 +4,10 @@ import { RootState } from "../../store/store";
 // Define a service using a base URL and expected endpoints
 export const ordersApi = createApi({
   // tagTypes: ["Products"],
-  reducerPath: "usersApi",
+  reducerPath: "ordersApi",
 
   baseQuery: fetchBaseQuery({
-    baseUrl: "http://localhost:4000/api/order/",
+    baseUrl: `${process.env.REACT_APP_API_URL}/api/order/`,
     prepareHeaders: (headers, { getState }) => {
       // By default, if we have a token in the store, let's use that for authenticated requests
       const token = (getState() as RootState).appSlice.token;

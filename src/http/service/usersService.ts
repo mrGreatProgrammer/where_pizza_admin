@@ -11,7 +11,7 @@ export const usersApi = createApi({
   reducerPath: "usersApi",
 
   baseQuery: fetchBaseQuery({
-    baseUrl: "http://localhost:4000/api/user/",
+    baseUrl: `${process.env.REACT_APP_API_URL}/api/user/`,
     prepareHeaders: (headers, { getState }) => {
       // By default, if we have a token in the store, let's use that for authenticated requests
       const token = (getState() as RootState).appSlice.token;

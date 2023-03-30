@@ -1,5 +1,5 @@
 import React from "react";
-import { Table } from "antd";
+import { Empty, Table } from "antd";
 import type { ColumnsType, TableProps } from "antd/es/table";
 
 interface DataType {
@@ -70,23 +70,43 @@ const onChange: TableProps<DataType>["onChange"] = (
   console.log("params", pagination, filters, sorter, extra);
 };
 
-interface jjf {
+interface usersDataApi {
   count: number;
   rows: DataType[];
 }
 
 interface UsersTableType {
-  data: jjf;
+  data: usersDataApi | null;
   isLaoding: boolean;
   isError: boolean;
+  page: number;
+  setPage: React.Dispatch<React.SetStateAction<number>>;
 }
 
-const UsersTable = ({ data, isLaoding, isError }: UsersTableType) => {
+const UsersTable = ({
+  page,
+  setPage,
+  data,
+  isLaoding,
+  isError,
+}: UsersTableType) => {
   return (
     <div className="max-w-5xl">
       <Table
         columns={columns}
         dataSource={data?.rows}
+        loading={isLaoding}
+        locale={{
+          emptyText() {
+            return (
+              <Empty
+                image={Empty.PRESENTED_IMAGE_SIMPLE}
+                description="Данных нет"
+              />
+            );
+          },
+        }}
+        pagination={{ current: page, onChange: setPage, total: data?.count, pageSize: 8 }}
         // onChange={onChange}
       />
     </div>
