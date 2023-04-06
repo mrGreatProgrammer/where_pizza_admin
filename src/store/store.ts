@@ -23,12 +23,14 @@ import storage from "redux-persist/lib/storage";
 import { productsApi } from "../http/service/productsService";
 import { usersApi } from "../http/service/usersService";
 import { ordersApi } from "../http/service/ordersService";
+import { restaurantApi } from "../http/service/restaurantsService";
 
 const rootReducer = combineReducers({
   appSlice,
   [productsApi.reducerPath]: productsApi.reducer,
   [usersApi.reducerPath]: usersApi.reducer,
   [ordersApi.reducerPath]: ordersApi.reducer,
+  [restaurantApi.reducerPath]: restaurantApi.reducer,
   // userSlice,
   // counterSlice: counterSlice,
   // productsSlice: productsSlice,
@@ -66,7 +68,8 @@ const store = configureStore({
     }).concat(
       productsApi.middleware,
       usersApi.middleware,
-      ordersApi.middleware
+      ordersApi.middleware,
+      restaurantApi.middleware
     ),
 });
 
