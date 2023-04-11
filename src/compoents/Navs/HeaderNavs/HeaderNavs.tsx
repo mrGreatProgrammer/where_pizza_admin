@@ -5,6 +5,7 @@ import { FullLogo, UserIcon } from "../../../imgs/icons";
 import { logoutAC } from "../../../store/appSlice/appSlice";
 import { useAppDispatch, useAppSelector } from "../../../store/store";
 import { INavLink } from "./../../../types/app";
+import SidebarNavs from "../SidebarNavs/SidebarNavs";
 
 type setActiveFuncParams = {
   isActive: boolean;
@@ -81,12 +82,17 @@ const HeaderNavs: React.FC = (): JSX.Element => {
 
   return (
     <nav className=" py-2 px-4  flex flex-row justify-between items-center">
+
+      <div className="block xl:hidden" >
+    <SidebarNavs sidebarNav={headerNav} />
+      </div>
+
       <div>
         <Link to={"/"}>
           <FullLogo />
         </Link>
       </div>
-      <ul className="flex flex-row gap-x-4">
+      <ul className="hidden xl:flex flex-row gap-x-4">
         {headerNav.map((e) => (
           <li key={e.id} className="text-lg font-semibold uppercase">
             <NavLink

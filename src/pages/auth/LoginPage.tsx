@@ -3,7 +3,7 @@ import LoginForm from "../../compoents/form/auth/LoginForm";
 
 const LoginPage = () => {
   return (
-    <div>
+    <div className="flex flex-col items-center min-h-screen mt-36" >
       <h1 className="text-red-600 text-5xl" >LoginPage</h1>
       <div>
         <LoginForm />

@@ -14,6 +14,7 @@ import Users from "./pages/users/Users";
 import AllUsers from "./pages/users/AllUsers";
 import Orders from "./pages/users/Orders";
 import SellerPage from "./pages/SellerPage/SellerPage";
+import PageNotFound from "./pages/errors/PageNotFound/PageNotFound";
 
 function App() {
   return (
@@ -39,8 +40,8 @@ function App() {
           </Route>
           <Route path="/seller" element={<SellerPage />}>
             {/* <Route  /> */}
-            {/* <Route /> */}
           </Route>
+          <Route path="*" element={<PageNotFound />} />
         </Routes>
       </div>
     </div>

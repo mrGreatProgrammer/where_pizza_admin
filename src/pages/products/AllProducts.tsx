@@ -12,7 +12,7 @@ const AllProducts = () => {
 
   return (
     <div>
-      <h1>AllProducts</h1>
+      <h2 className="text-2xl font-medium" >AddProduct</h2>
       <div>
         <div className="add__product-container">
           <AddProductForm />
