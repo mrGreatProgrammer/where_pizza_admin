@@ -4,7 +4,6 @@ import { IProduct, IProductsResponse } from "../../types/products";
 // import showNotification from "../../utils/showNotification";
 // import type { Pokemon } from './types'
 
-
 // Define a service using a base URL and expected endpoints
 export const productsApi = createApi({
   tagTypes: ["Products"],
@@ -34,7 +33,15 @@ export const productsApi = createApi({
     }),
     addProduct: builder.mutation(
       /*<IProduct, Partial<IProduct>>*/ {
-        query: ({ about, discount, img, name, price, ingredients, productsGroupId }) => {
+        query: ({
+          about,
+          discount,
+          img,
+          name,
+          price,
+          ingredients,
+          productsGroupId,
+        }) => {
           const formData = new FormData();
           formData.append("name", name);
           formData.append("about", about);
@@ -52,7 +59,7 @@ export const productsApi = createApi({
             body: formData,
           };
         },
-        
+
         invalidatesTags: [{ type: "Products", id: "PRODUCT" }],
         // onSuccess: (data:any)=>{
         //   showNotification("success", "ggg", "gggggg");
@@ -60,16 +67,14 @@ export const productsApi = createApi({
       }
     ),
     deleteProduct: builder.mutation({
-        query: (id) => {
-         
-          return {
-            url: `/product?id=${id}`,
-            method: "DELETE",
-          };
-        },
-        invalidatesTags: [{ type: "Products", id: "PRODUCT" }],
-      }
-    ),
+      query: (id) => {
+        return {
+          url: `/product?id=${id}`,
+          method: "DELETE",
+        };
+      },
+      invalidatesTags: [{ type: "Products", id: "PRODUCT" }],
+    }),
     getProductByName: builder.query({
       query: (name) => `product/${name}`,
     }),
@@ -80,10 +85,20 @@ export const productsApi = createApi({
       query: () => ({ url: "/group_of_products" }),
     }),
     getGroupByProducts: builder.query({
-      query: ({limit, page}) => ({ url: `/products_by_group?limit=${limit}&page=${page}` }),
+      query: ({ limit, page }) => ({
+        url: `/products_by_group?limit=${limit}&page=${page}`,
+      }),
     }),
     addRecipeOfProduct: builder.mutation({
-      query: (body) => ({ url: "/recipe_of_products", method: "POST", body }),
+      query: (body) => {
+        const formData = new FormData();
+        formData.append("name", body.name);
+        formData.append("price", body.price);
+        for (const key of Object.keys(body.img)) {
+          formData.append("img", body.img[key]);
+        }
+        return { url: "/recipe_of_products", method: "POST", body: formData };
+      },
     }),
     getRecipeOfProducts: builder.query({
       query: () => ({ url: "/recipe_of_products" }),
@@ -103,5 +118,5 @@ export const {
   useGetGroupOfProductsQuery,
   useGetRecipeOfProductsQuery,
   useGetGroupByProductsQuery,
-  useDeleteProductMutation
+  useDeleteProductMutation,
 } = productsApi;

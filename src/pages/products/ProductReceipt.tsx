@@ -5,6 +5,8 @@ import SubmitBtn from "../../compoents/form/Btns/SubmitBtn/SubmitBtn";
 import { useAddRecipeOfProductMutation } from "../../http/service/productsService";
 import showNotification from "../../utils/showNotification";
 import Input from "./../../compoents/form/Input/Input";
+import IngredientImgUploadForm from "../../compoents/form/IngredientImgUploadForm/IngredientImgUploadForm";
+import FileInput from "../../compoents/form/Btns/FileInput";
 
 const ProductReceipt = () => {
   const {
@@ -12,6 +14,9 @@ const ProductReceipt = () => {
     formState: { errors },
     register,
     handleSubmit,
+    setValue,
+    watch,
+    unregister,
   } = useForm({ mode: "all" });
 
   const [addIngredient, { isError, isLoading, isSuccess }] =
@@ -21,13 +26,47 @@ const ProductReceipt = () => {
 
   function onSubmit(data: any) {
     console.log(data);
-    addIngredient(data).then((d) => showNotification("info", "Успешно добавлено!", "Данный ингредиент успешно добавлен!"));
+    addIngredient(data).then((d) => {
+      //@ts-ignore
+      if (!d?.error) {
+        showNotification(
+          "info",
+          "Успешно добавлено!",
+          "Данный ингредиент успешно добавлен!"
+        );
+      } else {
+        showNotification(
+          "error",
+          "Произошла ошибка!",
+          "Произошла не предвиденная ошибка при добавлении!"
+        );
+      }
+    });
   }
 
   return (
-    <div className="px-7" >
+    <div className="px-7">
       <div>
         <form>
+          <div>
+            <FileInput
+              accept="image/*"
+              multiple={true}
+              name="img"
+              mode="append"
+              // name=""
+              label=""
+              //  mode = "update",
+              watch={watch}
+              setValue={setValue}
+              register={register}
+              unregister={unregister}
+            />
+            {/* <IngredientImgUploadForm
+            // formController={{ ...register("name") }}
+            // errMsg={errors.name?.message}
+            /> */}
+          </div>
           <div className="w-60">
             <Input
               elId=""
