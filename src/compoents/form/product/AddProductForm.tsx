@@ -46,7 +46,10 @@ const AddProductForm = () => {
 
   const handlerSubmit = (data: any) => {
     console.log(data);
-    addProduct(data);
+    addProduct(data).then((res) => {
+      console.log("res", res);
+      showNotification("success", "Успешно", "Продукт успешно создан!");
+    });
     // console.log(d);
     // if (isSuccess) {
     //   showNotification("success", "ssss", "gfafgagfafga");
@@ -153,7 +156,7 @@ const AddProductForm = () => {
                     allowClear={true}
                   >
                     {ingredients?.map((e: any, id: number) => (
-                      <Select.Option value={e.id}>
+                      <Select.Option key={id} value={e.id}>
                         <div className="flex flex-row gap-x-1">
                           <div className="border-r-gray-500 border-r w-28">
                             {e.name}
@@ -197,7 +200,9 @@ const AddProductForm = () => {
                     allowClear={true}
                   >
                     {groupsOfProducts?.map((e: any, id: number) => (
-                      <Select.Option value={e.id}>{e.title}</Select.Option>
+                      <Select.Option key={e.title} value={e.id}>
+                        {e.title}
+                      </Select.Option>
                     ))}
                   </Select>
                 </Form.Item>
@@ -268,7 +273,7 @@ const AddProductForm = () => {
         <div className="w-60">
           <SubmitBtn
             className={""}
-            onClick={""}
+            onClick={() => {}}
             txt={"Добавить"}
             disabled={false}
             loading={isLoading}

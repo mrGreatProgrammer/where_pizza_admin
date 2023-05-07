@@ -19,6 +19,18 @@ export const productsApi = createApi({
       }
       return headers;
     },
+    // @ts-ignore
+    responseHandler: (response) => {
+      console.log(response);
+    },
+    
+    // responseHandler: ()=>{
+
+    // }
+    // validateStatus(response, body) {
+      
+    // },
+
   }),
   endpoints: (builder) => ({
     getAllProducts: builder.query({
@@ -61,8 +73,14 @@ export const productsApi = createApi({
         },
 
         invalidatesTags: [{ type: "Products", id: "PRODUCT" }],
+        // transformErrorResponse(baseQueryReturnValue, meta, arg) {
+          
+        // },
+        transformResponse(baseQueryReturnValue, meta, arg) {
+          console.log("arg--->", arg, "\nmeta--->", meta, "\nbaseQueryReturnValue--->", baseQueryReturnValue)
+        },
         // onSuccess: (data:any)=>{
-        //   showNotification("success", "ggg", "gggggg");
+        //   showNotification("success", "ggg", "");
         // }
       }
     ),
