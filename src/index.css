@@ -2,7 +2,7 @@
 @tailwind components;
 @tailwind utilities;
 
-:where(.css-dev-only-do-not-override-1pxrcbd).ant-btn-primary {
+.ant-btn-primary {
   background: #ff7010 !important;
 }
 
